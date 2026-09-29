@@ -711,7 +711,7 @@ public class FileUserPreferences extends UserPreferences {
           color, modelRotation, backFaceShown, iconYaw, proportional);
     } else {
       return new CatalogPieceOfFurniture(name, icon, model,
-          width, depth, height, elevation, movable, 
+          width, depth, height, elevation, movable,
           staircaseCutOutShape, color, modelRotation, backFaceShown, iconYaw, proportional);
     }
   }

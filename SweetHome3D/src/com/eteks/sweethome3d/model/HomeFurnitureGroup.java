@@ -118,6 +118,18 @@ public class HomeFurnitureGroup extends HomePieceOfFurniture {
   }
 
   /**
+   * overrides get volume in HomePieceOfFurniture to correctly calculate the volume of a group
+   */
+  @Override
+  public float getVolume(){
+    float volume = 0;
+    for (HomePieceOfFurniture piece : this.furniture) {
+      volume += piece.getVolume();
+    }
+    return volume;
+  }
+
+  /**
    * Initializes new piece fields to their default values 
    * and reads piece from <code>in</code> stream with default reading method.
    */

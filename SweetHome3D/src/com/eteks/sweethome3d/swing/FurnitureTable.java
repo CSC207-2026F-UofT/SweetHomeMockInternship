@@ -1119,10 +1119,6 @@ public class FurnitureTable extends JTable implements View, Printable {
      */
     private String getColumnName(HomePieceOfFurniture.SortableProperty property, 
                                  UserPreferences preferences) {
-      if (property.toString().equals("VOLUME")){
-        System.out.println(preferences);//TODO debug output for this line: preferences: SweetHome3D$2@3762
-        //TODO next step: find out what it is, and fix the switch done here so that case VOLUME also works.
-      }
       switch (property) {
         case CATALOG_ID :
           return preferences.getLocalizedString(FurnitureTable.class, "catalogIdColumn");
@@ -1134,6 +1130,8 @@ public class FurnitureTable extends JTable implements View, Printable {
           return preferences.getLocalizedString(FurnitureTable.class, "depthColumn");
         case HEIGHT : 
           return preferences.getLocalizedString(FurnitureTable.class, "heightColumn");
+        case VOLUME :
+          return preferences.getLocalizedString(FurnitureTable.class, "volumeColumn");
         case X : 
           return preferences.getLocalizedString(FurnitureTable.class, "xColumn");
         case Y :
@@ -1182,6 +1180,8 @@ public class FurnitureTable extends JTable implements View, Printable {
         case Y :
         case ELEVATION : 
           return 50;
+        case VOLUME : // this function tells what size for the textfield to show the properties, volume probably longer
+          return 70;
         case ANGLE :
           return 35;        
         case LEVEL :
@@ -1219,6 +1219,8 @@ public class FurnitureTable extends JTable implements View, Printable {
           return getSizeRenderer(HomePieceOfFurniture.SortableProperty.DEPTH, preferences);
         case HEIGHT : 
           return getSizeRenderer(HomePieceOfFurniture.SortableProperty.HEIGHT, preferences);
+        case VOLUME :
+          return getSizeRenderer(HomePieceOfFurniture.SortableProperty.VOLUME, preferences);
         case X : 
           return getSizeRenderer(HomePieceOfFurniture.SortableProperty.X, preferences);
         case Y :
@@ -1345,6 +1347,16 @@ public class FurnitureTable extends JTable implements View, Printable {
                     isSelected, hasFocus, row, column);
               }
             };
+        case VOLUME :
+          return new SizeRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table,
+                                                           Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+              return super.getTableCellRendererComponent(table,
+                      value != null  ? ((HomePieceOfFurniture)value).getVolume()  : null,
+                      isSelected, hasFocus, row, column);
+            }
+          };
         case X :
           return new SizeRenderer() {
               @Override
