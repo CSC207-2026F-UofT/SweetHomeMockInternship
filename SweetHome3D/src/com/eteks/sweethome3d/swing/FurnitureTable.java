@@ -1119,6 +1119,10 @@ public class FurnitureTable extends JTable implements View, Printable {
      */
     private String getColumnName(HomePieceOfFurniture.SortableProperty property, 
                                  UserPreferences preferences) {
+      if (property.toString().equals("VOLUME")){
+        System.out.println(preferences);//TODO debug output for this line: preferences: SweetHome3D$2@3762
+        //TODO next step: find out what it is, and fix the switch done here so that case VOLUME also works.
+      }
       switch (property) {
         case CATALOG_ID :
           return preferences.getLocalizedString(FurnitureTable.class, "catalogIdColumn");
